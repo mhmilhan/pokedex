@@ -3,9 +3,9 @@ name: Periodic Health Check
 on:
   schedule:
     - cron: '0 12 * * *'
-  push:
-    branches:
-      - main
+#   push:
+#     branches:
+#       - main
 
 jobs:
   periodic_health_check:
@@ -19,16 +19,16 @@ jobs:
           max-attempts: 3 
           retry-delay: 5s
 
-      - name: Health Check done successfully
-        if: success()
-        run: |
-          curl -X POST ${{ secrets.DISCORD_WEBHOOK }} \
-          -H "Content-Type: application/json" \
-          -d '{"content": "Health Check Done Successfully"}'
+    #   - name: Health Check done successfully
+    #     if: success()
+    #     run: |
+    #       curl -X POST ${{ secrets.DISCORD_WEBHOOK }} \
+    #       -H "Content-Type: application/json" \
+    #       -d '{"content": "Health Check Done Successfully"}'
 
-      - name: Health Check Failure Notification
-        if: failure()
-        run: |
-          curl -X POST ${{ secrets.DISCORD_WEBHOOK }} \
-          -H "Content-Type: application/json" \
-          -d '{"content": "**Health Check Failed!** The Pokedex app might be down."}'
+    #   - name: Health Check Failure Notification
+    #     if: failure()
+    #     run: |
+    #       curl -X POST ${{ secrets.DISCORD_WEBHOOK }} \
+    #       -H "Content-Type: application/json" \
+    #       -d '{"content": "**Health Check Failed!** The Pokedex app might be down."}'
